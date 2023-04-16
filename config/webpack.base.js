@@ -7,7 +7,8 @@ module.exports = {
     entry: './index.ts',
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, '../dist')
+        path: path.resolve(__dirname, '../dist'),
+        assetModuleFilename: 'images/[hash][ext][query]'
     },
     module: {
         rules: [
@@ -17,12 +18,24 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.ts$/,
-                loader: 'ts-loader',
-                exclude: /node_modules/,
+                test: /\.(t|j)s$/,
+                loader: 'babel-loader',
                 options: {
-                    appendTsSuffixTo: [/\.vue$/]
+                    cacheDirectory: true,
                 }
+            },
+            {
+                test: /\.(le|c)ss$/,
+                use: [
+                    "style-loader",
+                    "css-loader",
+                    "less-loader"
+                ],
+                exclude: /node_modules/
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                type: 'asset/resource'
             }
         ]
     },

@@ -1,12 +1,23 @@
 <template>
-    <div @click='toFather'>Son</div>
+    <div class='son' @click='toFather'>Son</div>
     <ul @click='updateList($event)'>
         <li v-for='(item,index) in list' :data-name='item.name'>
             {{ item.name }}
         </li>
     </ul>
-    <div>{{ a }}</div>
+    <div class='a'>{{ a }}
+        <div class='b'>inner-b</div>
+    </div>
 </template>
+
+<style lang='less' scoped>
+.a {
+    color: #089e8a;
+    .b {
+        color: blue;
+    }
+}
+</style>
 
 <script lang='ts'>
 import {defineComponent} from 'vue'
